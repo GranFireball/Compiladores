@@ -18,8 +18,13 @@ void Operador(char str[]){
       posString++;
     }
     else if(c == '*'){
-      verifica[posString]= "Multiplicação\n";
-      posString++;
+      if(verifica[posString-1] == "Multiplicação\n"){
+        verifica[posString-1] = "Potenciação\n" ;
+      }
+      else{
+        verifica[posString]= "Multiplicação\n";
+        posString++;
+      }    
     }
     else if(c == '/'){
       verifica[posString]= "Divisão\n";
