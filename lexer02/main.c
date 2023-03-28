@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include<stdbool.h>
 
 void Operador(char str[]){
   char c;
@@ -7,6 +8,7 @@ void Operador(char str[]){
   char *verifica[9999];
   int qtdCaractInd = 0;
   char caractInd[9999][99];
+  bool exponenciacao = false;
   for(int i = 0; i < strlen(str); i++){
     c = str[i];
     if (c == '+') {
@@ -18,8 +20,23 @@ void Operador(char str[]){
       posString++;
     }
     else if(c == '*'){
-      verifica[posString]= "Multiplicação\n";
-      posString++;
+      if(exponenciacao == true){
+        if(verifica[posString-1] == "Multiplicação\n"){
+        verifica[posString-1] = "Potenciação\n" ;
+        exponenciacao = false;
+        }
+        else{
+          verifica[posString]= "Multiplicação\n";
+          posString++;
+          exponenciacao = true; 
+        }
+      }
+      else{
+        verifica[posString]= "Multiplicação\n";
+        posString++;
+        exponenciacao = true; 
+      }
+      
     }
     else if(c == '/'){
       verifica[posString]= "Divisão\n";
